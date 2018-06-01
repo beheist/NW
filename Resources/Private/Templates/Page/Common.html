@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<meta name="google-site-verification" content="{fusion:render(path:'googleSiteVerificationCode')}" />
-	<link rel="shortcut icon" href="{f:uri.resource(package: 'Beheist.NW', path: 'img/favicon.ico')}">
+	<link rel="shortcut icon" href="{f:uri.resource(package: distributionPackageName, path: 'img/favicon.ico')}">
 </f:section>
 
 <f:section name="headScripts">
@@ -13,11 +13,11 @@
 
 
 <f:section name="stylesheets">
-	<link rel="stylesheet" href="{f:uri.resource(package:'Beheist.NW', path:'css/index.css')}?bust=101"/>
+	<link rel="stylesheet" href="{f:uri.resource(package:distributionPackageName, path:'css/index.css')}?bust={bustCounter}"/>
 </f:section>
 
 <f:section name="bodyScripts">
-	<script src="{f:uri.resource(package:'Beheist.NW', path:'js/app.bundle.js')}"></script>
+	<script src="{f:uri.resource(package:distributionPackageName, path:'js/app.bundle.js')}?bust={bustCounter}"></script>
 
 	<f:if condition="{neos:rendering.live()}">
 		<script src="https://cdn.jsdelivr.net/ga-lite/latest/ga-lite.min.js" async></script>

@@ -1,18 +1,24 @@
 prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
+    @context.distributionPackageName = 'Beheist.NW'
+    @context.bustCounter = '1000'
     head {
         stylesheets.site = Neos.Fusion:Template {
             templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
             sectionName = 'stylesheets'
+            distributionPackageName = ${distributionPackageName}
+            bustCounter = ${bustCounter}
         }
 
         javascripts.site = Neos.Fusion:Template {
             templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
             sectionName = 'headScripts'
+            distributionPackageName = ${distributionPackageName}
         }
 
         meta = Neos.Fusion:Template {
             templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
             sectionName = 'meta'
+            distributionPackageName = ${distributionPackageName}
             googleSiteVerificationCode = ${q(site).property('googleSiteVerificationCode')}
         }
     }
@@ -91,7 +97,9 @@ prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
         javascripts.site = Neos.Fusion:Template {
             templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
             sectionName = 'bodyScripts'
+            distributionPackageName = ${distributionPackageName}
             googleAnalyticsProperty = ${q(site).property('googleAnalyticsProperty')}
+            bustCounter = ${bustCounter}
         }
     }
 }
