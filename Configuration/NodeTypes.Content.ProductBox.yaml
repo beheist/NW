@@ -1,0 +1,20 @@
+Beheist.NW:ProductBox:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Produkt-Box'
+  properties:
+    product:
+      type: reference
+      ui:
+        label: Produkt
+        inspector:
+          group: additionalprops
+          position: 1
+        reloadIfChanged: true
+
+Beheist.NW:ProductBoxNarrow:
+  superTypes:
+    Beheist.NW:ProductBox: true
+  ui:
+    label: 'Produkt-Box (schmal)'

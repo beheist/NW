@@ -1,0 +1,3 @@
+prototype(Beheist.NW:ProsAndCons) < prototype(Neos.NodeTypes:TwoColumn) {
+    templatePath = 'resource://Neos.NodeTypes.ColumnLayouts/Private/Templates/NodeTypes/MultiColumn.html'
+}

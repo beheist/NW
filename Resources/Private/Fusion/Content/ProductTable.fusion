@@ -1,0 +1,89 @@
+// News Feed
+prototype(Beheist.NW:ProductTable) < prototype(Neos.Neos:Content) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
+	sectionName = 'table'
+	attributes.class = 'producttable'
+
+	@context.productsSource = ${q(node).property('productsSource')}
+	products = Neos.Fusion:Case {
+		childproducts {
+			condition = ${productsSource == 'childproducts'}
+			renderer = Neos.Fusion:Collection {
+				itemName = 'product'
+				itemRenderer = Beheist.NW:ProductTableRow
+				collection = ${q(documentNode).children('[instanceof Beheist.NW:Product]').sort('totalGrade', 'DESC')}
+			}
+		}
+		allproducts {
+			condition = ${productsSource == 'allproducts'}
+			renderer = Neos.Fusion:Collection {
+				itemName = 'product'
+				itemRenderer = Beheist.NW:ProductTableRow
+				collection = ${q(site).find('[instanceof Beheist.NW:Product]').sort('totalGrade', 'DESC')}
+			}
+		}
+		selectedproducts {
+			condition = ${productsSource == 'selectedproducts'}
+			renderer = Neos.Fusion:Collection {
+				itemName = 'product'
+				itemRenderer = Beheist.NW:ProductTableRow
+				collection = ${q(q(node).property('products')).sort('totalGrade', 'DESC')}
+			}
+		}
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${'NodeType_Beheist.NW:Product'}
+		}
+	}
+}
+
+prototype(Beheist.NW:ProductTableRow) < prototype(Neos.Fusion:Template) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
+	sectionName = 'row'
+
+	product = ${product}
+
+    productdata {
+		name = ${q(product).property('title')}
+		listPrice = ${q(product).property('listPrice') / 100}
+		salePrice = ${q(product).property('salePrice') ? q(product).property('salePrice') / 100 : (q(product).property('offerPrice') ? q(product).property('offerPrice') / 100 : q(product).property('listPrice') / 100)}
+		brand = ${q(product).property('brand')}
+		rating = ${q(product).property('rating')}
+		amazonLink = ${q(product).property('amazonLink')}
+		mediumImage = ${q(product).property('mediumImage')}
+		totalGrade = ${q(product).property('totalGrade')}
+		vergleichssieger = ${q(product).property('vergleichssieger')}
+		preisleistungssieger = ${q(product).property('preisleistungssieger')}
+
+		// The following propertys are product-specific and need to be adapted for each product category
+		specs {
+			saugleistung = ${q(product).property('saugleistung')}
+			behaeltergroesse = ${q(product).property('behaeltergroesse')}
+			zubehoer = ${q(product).property('zubehoer')}
+			schlauchlaenge = ${q(product).property('schlauchlaenge')}
+			kabellaenge = ${q(product).property('kabellaenge')}
+			blasfunktion = ${q(product).property('blasfunktion')}
+			steckdose = ${q(product).property('steckdose')}
+		}
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${product}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + product.identifier}
+			2 = ${'DescendantOf_' + product.identifier}
+		}
+	}
+}

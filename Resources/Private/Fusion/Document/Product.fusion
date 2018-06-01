@@ -1,0 +1,18 @@
+prototype(Beheist.NW:Product.Document) < prototype(Beheist.NW:AbstractDocument.Document) {
+    body {
+        templatePath = 'resource://Beheist.NW/Private/Templates/Page/Product.html'
+        content {
+            productData = Beheist.NW:ProductData {
+                @context.product = ${node}
+            }
+        }
+        @cache {
+            mode = 'uncached'
+            context {
+                1 = 'node'
+                2 = 'documentNode'
+                3 = 'site'
+            }
+        }
+    }
+}

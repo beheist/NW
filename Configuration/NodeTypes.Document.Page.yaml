@@ -1,0 +1,5 @@
+Beheist.NW:Page:
+  superTypes:
+    Neos.NodeTypes:Page: true
+  ui:
+    label: 'Seite'

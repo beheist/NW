@@ -1,0 +1,54 @@
+// Product data extraction
+prototype(Beheist.NW:ProductData) < prototype(Neos.Fusion:RawArray) {
+    product = ${product}
+    name = ${q(product).property('title')}
+    lastModifiedDate = ${q(product).property('_lastModificationDateTime')}
+    brand = ${q(product).property('brand')}
+    abstract = Neos.Neos:ContentCollectionRenderer {
+        collection = ${q(product).children('abstract')}
+    }
+
+    amazon = Neos.Fusion:RawArray {
+        listPrice = ${q(product).property('listPrice') / 100}
+        salePrice = ${q(product).property('salePrice') ? q(product).property('salePrice') / 100 : (q(product).property('offerPrice') ? q(product).property('offerPrice') / 100 : q(product).property('listPrice') / 100)}
+        rating = ${q(product).property('rating')}
+        link = ${q(product).property('amazonLink')}
+        ean = ${q(product).property('ean')}
+    }
+
+    dimensions = Neos.Fusion:RawArray {
+        height = ${q(product).property('height') ? (q(product).property('height') * 0.0254) : ''}
+        width = ${q(product).property('width') ? (q(product).property('width') * 0.0254) : ''}
+        length = ${q(product).property('length') ? (q(product).property('length') * 0.0254) : ''}
+        weight = ${q(product).property('weight') ? (q(product).property('weight') * 0.00453592) : ''}
+    }
+
+    images = Neos.Fusion:RawArray {
+        small = ${q(product).property('smallImage')}
+        medium = ${q(product).property('mediumImage')}
+        large = ${q(product).property('largeImage')}
+        variants = ${q(product).property('imageVariants')}
+    }
+
+    grades = Neos.Fusion:RawArray {
+        vergleichssieger = ${q(node).property('vergleichssieger')}
+        preisleistungssieger = ${q(node).property('preisleistungssieger')}
+        leistung = ${q(product).property('leistungGrade')}
+        handhabung = ${q(product).property('handhabungGrade')}
+        ausstattung = ${q(product).property('ausstattungGrade')}
+        verarbeitung = ${q(product).property('verarbeitungGrade')}
+        preis = ${q(product).property('preisGrade')}
+        total = ${q(product).property('totalGrade')}
+    }
+
+    // The following propertys are product-specific and need to be adapted for each product category
+    specs = Neos.Fusion:RawArray {
+        saugleistung = ${q(product).property('saugleistung')}
+        behaeltergroesse = ${q(product).property('behaeltergroesse')}
+        zubehoer = ${q(product).property('zubehoer')}
+        schlauchlaenge = ${q(product).property('schlauchlaenge')}
+        kabellaenge = ${q(node).property('kabellaenge')}
+        blasfunktion = ${q(product).property('blasfunktion')}
+        steckdose = ${q(product).property('steckdose')}
+    }
+}

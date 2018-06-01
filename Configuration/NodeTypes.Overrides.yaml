@@ -1,0 +1,18 @@
+Neos.NodeTypes:Page:
+  abstract: true
+  childNodes:
+    abstract:
+      type: Neos.Neos:ContentCollection
+      position: 'before main'
+    aside:
+      type: Neos.Neos:ContentCollection
+      position: 'after main'
+  properties:
+    logo:
+      type: Neos\Media\Domain\Model\ImageInterface
+      ui:
+        label: 'Page Image'
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          position: 5

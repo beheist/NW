@@ -1,0 +1,9 @@
+Neos.NodeTypes:AssetList:
+  abstract: true
+
+Neos.NodeTypes:Form:
+  abstract: true
+
+Neos.NodeTypes:Column:
+  abstract: true
+

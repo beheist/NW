@@ -1,0 +1,24 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace cr=Neos\ContentRepository\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<f:section name="body">
+	<f:render partial="Header" arguments="{_all}"/>
+
+	<div class="row">
+		<main class="column small-12 product-main">
+			<h1>{content.pageTitle}</h1>
+			{content.abstract -> f:format.raw()}
+		</main>
+	</div>
+	<div class="row">
+		<section class="column small-12 medium-7">
+			{content.main -> f:format.raw()}
+		</section>
+		<aside class="column small-12 medium-5">
+			{content.aside -> f:format.raw()}
+		</aside>
+	</div>
+
+	<f:render partial="Footer" arguments="{_all}"/>
+</f:section>

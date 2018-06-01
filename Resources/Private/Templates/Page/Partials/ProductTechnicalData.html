@@ -1,0 +1,76 @@
+<h2 class="headline-inverted">Technische Daten</h2>
+<table class="product-technical-data">
+	<tbody>
+
+
+	<f:if condition="{productData.brand}">
+		<tr>
+			<th>Hersteller</th>
+			<td>
+				<neos:link.node node="{productData.brand}"/>
+			</td>
+		</tr>
+	</f:if>
+
+	<f:if condition="{productData.amazon.ean}">
+		<tr>
+			<th>Atikelnummer (EAN)</th>
+			<td>{productData.amazon.ean}</td>
+		</tr>
+	</f:if>
+
+	<f:if condition="{productData.dimensions.height}">
+		<tr>
+			<th>Abmessungen (L/B/H)</th>
+			<td>{productData.dimensions.length -> f:format.number(decimals:'1', decimalSeparator:',', thousandsSeparator:'.')} / {productData.dimensions.width ->
+				f:format.number(decimals:'1', decimalSeparator:',', thousandsSeparator:'.')} / {productData.dimensions.height -> f:format.number(decimals:'1', decimalSeparator:',',
+				thousandsSeparator:'.')} cm
+			</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.dimensions.weight}">
+		<tr>
+			<th>Gewicht</th>
+			<td>{productData.dimensions.weight -> f:format.number(decimals:'2', decimalSeparator:',', thousandsSeparator:'.')} kg</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.specs.saugleistung}">
+		<tr>
+			<th>Saugleistung</th>
+			<td>{productData.specs.saugleistung}</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.specs.behaeltergroesse}">
+		<tr>
+			<th>Behältergröße</th>
+			<td>{productData.specs.behaeltergroesse}</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.specs.schlauchlaenge}">
+		<tr>
+			<th>Schlauchlänge</th>
+			<td>{productData.specs.schlauchlaenge}</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.specs.kabellaenge}">
+		<tr>
+			<th>Kabellänge</th>
+			<td>{productData.specs.kabellaenge}</td>
+		</tr>
+	</f:if>
+	<f:if condition="{productData.specs.zubehoer}">
+		<tr>
+			<th>Zubehör</th>
+			<td>{productData.specs.zubehoer}</td>
+		</tr>
+	</f:if>
+	<tr>
+		<th>Blasfunktion</th>
+		<td><i class="fa {f:if(condition:'{productData.specs.blasfunktion}', then:'fa-check good', else:'fa-times bad')}"></i></td>
+	</tr>
+	<tr>
+		<th>Integrierte Steckdose</th>
+		<td><i class="fa {f:if(condition:'{productData.specs.steckdose}', then:'fa-check good', else:'fa-times bad')}"></i></td>
+	</tr>
+	</tbody>
+</table>

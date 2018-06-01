@@ -1,0 +1,5 @@
+Beheist.NW:ProsAndCons:
+  superTypes:
+    Neos.NodeTypes:TwoColumn: TRUE
+  ui:
+    label: Pros Und Cons

@@ -1,0 +1,4 @@
+prototype(Neos.NodeTypes:MultiColumn).attributes.class = 'row'
+prototype(Neos.NodeTypes:TwoColumn).columns.itemRenderer.attributes.class = 'columns small-6'
+prototype(Neos.NodeTypes:ThreeColumn).columns.itemRenderer.attributes.class = 'columns small-12 medium-4'
+prototype(Neos.NodeTypes:FourColumn).columns.itemRenderer.attributes.class = 'columns small-12 medium-3'

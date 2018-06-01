@@ -1,0 +1,46 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  lang="en">
+<f:section name="short">
+	<p>
+		<a href="{neos:uri.node(node: node)}">{title}<br><span class="muted">{date -> f:format.date(format:'M d, Y')}</span></a>
+	</p>
+</f:section>
+<f:section name="long">
+	<article class="row">
+		<f:if condition="{logo}">
+			<f:then>
+				<div class="large-5 columns">
+					<neos:link.node node="{node}">
+								<media:image image="{logo}" alt="{title}"/>
+					</neos:link.node>
+				</div>
+				<div class="large-7 columns">
+					<h2><a href="{neos:uri.node(node: node)}" title="{title}">{title}</a></h2>
+					<p>
+						<span><i class="fa fa-fw fa-user"></i> {author} &nbsp;&nbsp;</span>
+						<span><i class="fa fa-fw fa-calendar"></i> {date -> f:format.date(format:'M d, Y')} &nbsp;&nbsp;</span>
+					</p>
+					{abstract -> f:format.raw()}
+					<p><a href="{neos:uri.node(node: node)}">Weiterlesen...</a></p>
+				</div>
+			</f:then>
+			<f:else>
+				<div class="small-12 columns">
+					<h2><a href="{neos:uri.node(node: node)}" title="{title}">{title}</a></h2>
+					<p>
+						<span><i class="fa fa-fw fa-user"></i> {author} &nbsp;&nbsp;</span>
+						<span><i class="fa fa-fw fa-calendar"></i> {date -> f:format.date(format:'M d, Y')} &nbsp;&nbsp;</span>
+					</p>
+					{abstract -> f:format.raw()}
+					<p><a href="{neos:uri.node(node: node)}">Weiterlesen...</a></p>
+				</div>
+			</f:else>
+		</f:if>
+	</article>
+	<hr>
+</f:section>
+</html>

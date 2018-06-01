@@ -1,0 +1,48 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace cr=Neos\ContentRepository\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<f:section name="body">
+	<f:render partial="Header" arguments="{_all}"/>
+
+	<div class="row">
+		<div class="column small-12">
+			{content.breadcrumbs -> f:format.raw()}
+		</div>
+	</div>
+
+	<div class="row">
+		<main class="column small-12">
+			<h1>{content.pageTitle}</h1>
+			<f:if condition="{content.author}">
+				<p>
+					<span><i class="fa fa-fw fa-user"></i> {content.author} &nbsp;&nbsp;</span>
+					<span><i class="fa fa-fw fa-calendar"></i> {content.date -> f:format.date(format:'M d, Y')} &nbsp;&nbsp;</span>
+				</p>
+			</f:if>
+
+			<f:if condition="{content.logo}">
+				<p>
+					<media:image image="{content.logo}" alt="{content.pageTitle}"/>
+				</p>
+			</f:if>
+		</main>
+	</div>
+
+	<section class="fullwidth">
+		{content.abstract -> f:format.raw()}
+	</section>
+
+	<div class="row">
+		<section class="column small-12 medium-8">
+			{content.main -> f:format.raw()}
+		</section>
+		<div class="column medium-1"></div>
+		<aside class="column small-12 medium-3">
+			{content.aside -> f:format.raw()}
+			{content.siteAside -> f:format.raw()}
+		</aside>
+	</div>
+
+	<f:render partial="Footer" arguments="{_all}"/>
+</f:section>

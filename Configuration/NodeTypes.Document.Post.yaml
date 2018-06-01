@@ -1,0 +1,14 @@
+Beheist.NW:Post:
+  superTypes:
+    Neos.NodeTypes:Page: true
+  ui:
+    label: Post
+    icon: icon-file-text-alt
+  properties:
+    author:
+      type: string
+      ui:
+        label: Autor
+        inspector:
+          group: additionalprops
+          position: 1

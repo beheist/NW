@@ -1,0 +1,17 @@
+Beheist.NW:DefinitionBox:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Definitions-Box'
+    icon: question-circle-o
+  properties:
+    term:
+      type: string
+      defaultValue: 'Begriff'
+      ui:
+        inlineEditable: true
+    definition:
+      type: string
+      defaultValue: 'Definition'
+      ui:
+        inlineEditable: true

@@ -1,0 +1,30 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace fusion=Neos\Fusion\ViewHelpers}
+
+<f:section name="meta">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="google-site-verification" content="{fusion:render(path:'googleSiteVerificationCode')}" />
+	<link rel="shortcut icon" href="{f:uri.resource(package: 'Beheist.NW', path: 'img/favicon.ico')}">
+</f:section>
+
+<f:section name="headScripts">
+</f:section>
+
+
+<f:section name="stylesheets">
+	<link rel="stylesheet" href="{f:uri.resource(package:'Beheist.NW', path:'css/index.css')}?bust=101"/>
+</f:section>
+
+<f:section name="bodyScripts">
+	<script src="{f:uri.resource(package:'Beheist.NW', path:'js/app.bundle.js')}"></script>
+
+	<f:if condition="{neos:rendering.live()}">
+		<script src="https://cdn.jsdelivr.net/ga-lite/latest/ga-lite.min.js" async></script>
+		<script>
+            var galite = galite || {};
+            galite.UA = '<fusion:render path="googleAnalyticsProperty" />';
+            galite.anonymizeIp = true;
+		</script>
+	</f:if>
+</f:section>

@@ -1,0 +1,140 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace fusion=Neos\Fusion\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  lang="en">
+
+<f:section name="table">
+	<table {attributes -> f:format.raw()}>
+		<thead>
+		<f:render section="headerRow"/>
+		</thead>
+		<tbody>
+		{products -> f:format.raw()}
+		</tbody>
+		<tfoot>
+		<f:render section="headerRow"/>
+		</tfoot>
+	</table>
+</f:section>
+
+<f:section name="row">
+	<tr class="{f:if(condition:'{productdata.vergleichssieger}', then:'producttable--vergleichssieger')} {f:if(condition:'{productdata.preisleistungssieger}', then:'producttable--preisleistungssieger')}">
+		<td>
+			<f:if condition="{productdata.vergleichssieger}">
+				<f:then><span><i class="fa fa-trophy"></i>&nbsp;&nbsp;VERGLEICHSBESTER</span></f:then>
+			</f:if>
+			<f:if condition="{productdata.preisleistungssieger}">
+				<f:then><span><i class="fa fa-star"></i>&nbsp;&nbsp;PREIS-LEISTUNG</span></f:then>
+			</f:if>
+		</td>
+		<td>
+			<a href="{productdata.amazonLink}" target="_blank" title="Angebot für {productdata.name} bei Amazon ansehen">
+				<img src="{productdata.mediumImage}" alt="Produktbild zu {productdata.name}">
+				{productdata.name}
+			</a>
+		</td>
+		<td>
+			<strong class="
+			{f:if(condition:'{productdata.totalGrade} >= 90', then:'verygood')}
+			{f:if(condition:'{productdata.totalGrade} >= 70 && {productdata.totalGrade} < 90', then:'good')}
+			{f:if(condition:'{productdata.totalGrade} >= 50 && {productdata.totalGrade} < 70', then:'average')}
+			{f:if(condition:'{productdata.totalGrade} < 50', then:'bad')}
+			">{productdata.totalGrade}</strong>
+			<small>/ 100</small>
+			<small><neos:link.node node="{product}">Produktdetails</neos:link.node></small>
+		</td>
+		<td>
+			<a href="{productdata.amazonLink}" target="_blank" title="Angebot für {productdata.name} bei Amazon ansehen">
+				<f:render partial="Rating" arguments="{rating: productdata.rating}"/>
+			</a>
+		</td>
+		<td>
+			<neos:link.node node="{productdata.brand}"/>
+		</td>
+		<td class="producttable__feature">{productdata.specs.saugleistung}</td>
+		<td class="producttable__feature">{productdata.specs.behaeltergroesse}</td>
+		<td class="producttable__feature">{productdata.specs.schlauchlaenge}</td>
+		<td class="producttable__feature">{productdata.specs.kabellaenge}</td>
+		<td class="producttable__feature">{productdata.specs.zubehoer}</td>
+		<td class="producttable__feature"><i class="fa {f:if(condition:'{productdata.specs.blasfunktion}', then:'fa-check good', else:'fa-times bad')}"></i></td>
+		<td class="producttable__feature"><i class="fa {f:if(condition:'{productdata.specs.steckdose}', then:'fa-check good', else:'fa-times bad')}"></i></td>
+		<td>
+			<a href="{productdata.amazonLink}" target="_blank" title="{content.pageTitle} bei Amazon ansehen" class="button large secondary">
+				Angebot ansehen <i class="fa fa-arrow-right"></i>
+			</a>
+		</td>
+	</tr>
+</f:section>
+
+<f:section name="headerRow">
+	<tr>
+		<th>&nbsp;</th>
+		<th>Produkt</th>
+		<th>
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Diese Bewertung zeigt das Gesamtergebnis unseres Produktvergleichs auf einer Skala von 0 bis 100.">
+				Bewertung
+			</span>
+		</th>
+		<th>
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Die Beliebtheit dieses Produkts auf Amazon.de">
+				Beliebtheit
+			</span>
+		</th>
+		<th>
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Der Hersteller bzw. die Marke, unter der dieses Produkt vertrieben wird.">
+				Hersteller
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Die Saugleistung gibt an, wieviel Strom der Mehrzwecksauger verbraucht. Gleichzeitig ist sie ein Maß für die tatsächliche Reinigungsleistung, die aber noch von weiteren Faktoren abhängt.">
+				Leistung
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Das Volumen des Schmutzfangbehälters. Je größer das Volumen, desto länger kann ohne Arbeitsunterbrechung gesaugt werden.">
+				Behälter
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Eine größere Schlauchlänge erlaubt einen besseren Aktionsradius beim Saugen und damit eine Zeitersparnis.">
+				Schlauch
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Auch die Kabellänge hat einen Einfluss auf den Aktionsradius und kann den Einsatz eines Verlängerungskabels nötig machen.">
+				Kabel
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Zubehörteile, die mit dem Produkt mitgeliefert werden.">
+				Zubehör
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Eine Blasfunktion erlaubt es, den Mehrzwecksauger auch z.B. als Laubbläser oder zum Reinigen verschmutzer, aber schwer erreichbarer Bauteile zu verwenden.">
+				Blasfunktion
+			</span>
+		</th>
+		<th class="producttable__feature">
+			<span data-tooltip aria-haspopup="true" class="has-tip" data-disable-hover="false"
+				  title="Verfügt der Nass-Trockensauger über eine integrierte (Mehrfach-)Steckdose zum Anschluss weiterer Geräte, wie z.B. Elektrowerkzeuge?">
+				Steckdose
+			</span>
+		</th>
+		<th></th>
+	</tr>
+</f:section>
+
+</html>

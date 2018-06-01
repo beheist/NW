@@ -1,0 +1,10 @@
+Neos:
+  Flow:
+    mvc:
+      routes:
+        Beheist.NW: true
+
+  Neos:
+    fusion:
+      autoInclude:
+        Beheist.NW: true

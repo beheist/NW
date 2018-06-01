@@ -1,0 +1,153 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  lang="en">
+
+
+<f:section name="articlePreview">
+	<article class="row ads">
+		<div class="large-5 columns">
+			<p class="muted">Sponsored Link</p>
+			<f:if condition="{neos:rendering.inBackend()}">
+				<f:then>
+					<img src="https://placehold.it/338x280&text=Square Banner!">
+				</f:then>
+				<f:else>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- 2017 Article Preview Rect -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:336px;height:280px"
+						 data-ad-client="ca-pub-9233526682757949"
+						 data-ad-slot="3306455322"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</f:else>
+			</f:if>
+		</div>
+		<div class="large-7 columns">
+			<h2>
+				<neos:link.node node="{site}">{siteTitle}</neos:link.node>
+			</h2>
+			<p>{siteBlurb}</p>
+
+			<f:if condition="{neos:rendering.inBackend()}">
+				<f:then>
+					<img src="https://placehold.it/440x15&text=Square Banner!">
+				</f:then>
+				<f:else>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- 2017 Article Preview Text -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-9233526682757949"
+						 data-ad-slot="3027253722"
+						 data-ad-format="link"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</f:else>
+			</f:if>
+		</div>
+	</article>
+	<hr>
+</f:section>
+
+
+<f:section name="topBanner">
+	<div class="row ads">
+		<div class="columns small-12">
+			<f:if condition="{neos:rendering.inBackend()}">
+				<f:then>
+					<img src="https://placehold.it/728x90&text=Large Banner">
+				</f:then>
+				<f:else>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- 2017 Responsive Top -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-9233526682757949"
+						 data-ad-slot="9352988925"
+						 data-ad-format="auto"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</f:else>
+			</f:if>
+		</div>
+	</div>
+</f:section>
+
+
+<f:section name="largeBanner">
+	<div class="row ads">
+		<div class="columns small-12">
+			<f:if condition="{neos:rendering.inBackend()}">
+				<f:then>
+					<img src="https://placehold.it/728x90&text=Large Banner">
+				</f:then>
+				<f:else>
+					<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- 2017 Responsive Banner in Article -->
+					<ins class="adsbygoogle"
+						 style="display:block"
+						 data-ad-client="ca-pub-9233526682757949"
+						 data-ad-slot="1829722123"
+						 data-ad-format="auto"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</f:else>
+			</f:if>
+		</div>
+	</div>
+</f:section>
+
+
+<f:section name="sidebarRectangle">
+	<div class="ads">
+		<f:if condition="{neos:rendering.inBackend()}">
+			<f:then>
+				<img src="https://placehold.it/338x280&text=Square Banner">
+			</f:then>
+			<f:else>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 2017 Rectangle Right -->
+				<ins class="adsbygoogle"
+					 style="display:inline-block;width:336px;height:280px"
+					 data-ad-client="ca-pub-9233526682757949"
+					 data-ad-slot="9492589729"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>
+
+
+<f:section name="footerText">
+	<div class="ads">
+		<f:if condition="{neos:rendering.inBackend()}">
+			<f:then>
+				<img src="https://placehold.it/728x16&text=Text Ad">
+			</f:then>
+			<f:else>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- 2017 Footer Text -->
+				<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-9233526682757949"
+					data-ad-slot="4503986927"
+					data-ad-format="link"></ins>
+				<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</f:else>
+		</f:if>
+	</div>
+</f:section>
+
+
+</html>

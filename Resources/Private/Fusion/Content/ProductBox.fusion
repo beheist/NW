@@ -1,0 +1,33 @@
+// News Feed
+prototype(Beheist.NW:ProductBox) >
+prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
+    templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductBox.html'
+    attributes.class = 'productbox productbox--full'
+
+    @context.product = ${product ? product : q(node).property('product')}
+
+    productData = Beheist.NW:ProductData
+
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'product'
+        }
+    }
+}
+
+prototype(Beheist.NW:ProductBoxNarrow) < prototype(Beheist.NW:ProductBox) {
+    templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductBox.html'
+    attributes.class = 'productbox productbox--narrow'
+
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'product'
+        }
+    }
+}

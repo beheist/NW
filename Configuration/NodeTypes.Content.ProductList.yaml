@@ -1,0 +1,24 @@
+Beheist.NW:ProductList:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Produkt-Liste'
+  properties:
+    linkMode:
+      position: 1
+      type: string
+      defaultValue: directChildren
+      ui:
+        label: Link-Modus
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              directChildren:
+                label: 'Direkte Kindseiten'
+              allProductsOfBrand:
+                label: 'Alle Produkte dieser Marke'
+              allProducts:
+                label: 'Alle Produkte'

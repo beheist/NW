@@ -1,0 +1,37 @@
+Beheist.NW:SiteRoot:
+  superTypes:
+    Neos.NodeTypes:Page: true
+  ui:
+    label: 'Site Root'
+    icon: icon-globe
+  properties:
+    siteTitle:
+      type: string
+      ui:
+        label: Site-Title
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          position: 1
+    siteSubTitle:
+      type: string
+      ui:
+        label: Site-SubTitle
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          position: 2
+    googleAnalyticsProperty:
+      type: string
+      ui:
+        label: 'Google Analytics-Property'
+        inspector:
+          group: additionalprops
+          position: 3
+    googleSiteVerificationCode:
+      type: string
+      ui:
+        label: 'Google Site Verification Token'
+        inspector:
+          group: additionalprops
+          position: 4

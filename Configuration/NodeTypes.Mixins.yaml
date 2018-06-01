@@ -1,0 +1,12 @@
+Beheist.NW:HasPropertiesMixin:
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        additionalprops:
+          label: Zusatzeigenschaften
+          tab: default
+
+Neos.Neos:Node:
+  superTypes:
+    Beheist.NW:HasPropertiesMixin: true

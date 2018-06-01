@@ -1,0 +1,46 @@
+// News Feed
+prototype(Beheist.NW:ProductList) < prototype(Neos.Neos:Content) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/FusionObjects/Collection.html'
+	attributes.class = 'productlist'
+
+	@context.linkMode = ${q(node).property('linkMode') ? q(node).property('linkMode') : 'directChildren'}
+
+	pages = Neos.Fusion:Case {
+		directChildren {
+			condition = ${linkMode == 'directChildren'}
+			renderer = Neos.Fusion:Collection {
+				collection = ${q(documentNode).children('[instanceof Beheist.NW:Product]').sort('title', 'ASC')}
+				itemRenderer = Beheist.NW:ProductBox
+				itemName = 'product'
+			}
+		}
+		allProductsOfBrand {
+			condition = ${linkMode == 'allProductsOfBrand'}
+			renderer = Neos.Fusion:Collection {
+				collection = ${q(site).find('[instanceof Beheist.NW:Product]').filterByReference('brand', documentNode).sort('title', 'ASC')}
+				itemRenderer = Beheist.NW:ProductBox
+				itemName = 'product'
+			}
+		}
+		allProducts {
+			condition = ${linkMode == 'allProducts'}
+			renderer = Neos.Fusion:Collection {
+				collection = ${q(site).find('[instanceof Beheist.NW:Product]').sort('title', 'ASC')}
+				itemRenderer = Beheist.NW:ProductBox
+				itemName = 'product'
+			}
+		}
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${'NodeType_Beheist.NW:Product'}
+		}
+	}
+}

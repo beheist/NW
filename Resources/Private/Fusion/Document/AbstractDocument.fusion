@@ -1,0 +1,97 @@
+prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
+    head {
+        stylesheets.site = Neos.Fusion:Template {
+            templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
+            sectionName = 'stylesheets'
+        }
+
+        javascripts.site = Neos.Fusion:Template {
+            templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
+            sectionName = 'headScripts'
+        }
+
+        meta = Neos.Fusion:Template {
+            templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
+            sectionName = 'meta'
+            googleSiteVerificationCode = ${q(site).property('googleSiteVerificationCode')}
+        }
+    }
+
+    body {
+        templatePath = 'resource://Beheist.NW/Private/Templates/Page/Default.html'
+        sectionName = 'body'
+        parts {
+            topmenu = Neos.Neos:Menu {
+                @class = 'Beheist\\NW\\Fusion\\MenuImplementation'
+                startingPoint = ${q(site).children('[instanceof Neos.Neos:Document]').get(0)}
+                attributes.class = 'menu vertical medium-horizontal'
+                attributes.data-responsive-menu = 'drilldown medium-dropdown'
+                maximumLevels = 1
+
+            }
+            footermenu = Neos.Neos:Menu {
+                @class = 'Beheist\\NW\\Fusion\\MenuImplementation'
+                startingPoint = ${q(site).children('[instanceof Neos.Neos:Document]').get(1)}
+                attributes.class = 'menu'
+            }
+            mainmenu = Neos.Neos:Menu {
+                @class = 'Beheist\\NW\\Fusion\\MenuImplementation'
+                itemCollection = ${q(site).children('[instanceof Neos.Neos:Document]').slice(2, 99)}
+                templatePath = 'resource://Beheist.NW/Private/Templates/FusionObjects/Menu.html'
+                attributes.class = 'menu vertical medium-horizontal expanded medium-text-center'
+                attributes.data-responsive-menu = 'drilldown medium-dropdown'
+            }
+        }
+
+        site = ${site}
+        siteTitle = ${q(site).property('siteTitle')}
+        siteSubTitle = ${q(site).property('siteSubTitle')}
+
+        // These are your content areas, you can define as many as you want, just name them and the nodePath.
+		content {
+            node = ${node}
+            pageTitle = ${q(node).property('title')}
+            breadcrumbs = Neos.Neos:BreadcrumbMenu {
+                attributes.class = 'breadcrumbs'
+            }
+            date = ${q(node).property('_hiddenBeforeDateTime') ? q(node).property('_hiddenBeforeDateTime') : q(node).property('_creationDateTime')}
+            author = ${q(node).property('author')}
+            logo = ${q(node).property('logo')}
+            // The abstract content section
+			abstract = Neos.Neos:ContentCollection {
+                nodePath = 'abstract'
+            }
+            // The default content section
+			main = Neos.Neos:PrimaryContent {
+                nodePath = 'main'
+            }
+            // The aside content section
+			aside = Neos.Neos:ContentCollection {
+                nodePath = 'aside'
+            }
+            // The site aside content section
+			siteAside = Neos.Neos:ContentCollectionRenderer {
+                collection = ${q(site).children('aside').children()}
+                @cache {
+                    mode = 'cached'
+                    entryIdentifier {
+                        node = ${node}
+                        site = ${site}
+                        editPreviewMode = ${node.context.currentRenderingMode.name}
+                    }
+                    entryTags {
+                        1 = ${'Node_' + node.identifier}
+                        2 = ${'DescendantOf_' + site.identifier}
+                    }
+                }
+            }
+            siteAside.@if.condition = ${documentNode != site}
+        }
+
+        javascripts.site = Neos.Fusion:Template {
+            templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
+            sectionName = 'bodyScripts'
+            googleAnalyticsProperty = ${q(site).property('googleAnalyticsProperty')}
+        }
+    }
+}

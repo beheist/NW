@@ -1,0 +1,6 @@
+Beheist.NW:Menu:
+  superTypes:
+    Neos.Neos:Shortcut: true
+  ui:
+    label: Menü
+    icon: icon-folder-open

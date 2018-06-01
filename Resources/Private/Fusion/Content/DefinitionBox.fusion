@@ -1,0 +1,8 @@
+// News Feed
+prototype(Beheist.NW:DefinitionBox) < prototype(Neos.Neos:Content) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/DefinitionBox.html'
+	attributes.class = 'definitionbox'
+
+	term = ${q(node).property('term')}
+	definition = ${q(node).property('definition')}
+}

@@ -1,0 +1,99 @@
+// News Feed
+prototype(Beheist.NW:PageList) < prototype(Neos.Neos:Content) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/FusionObjects/Collection.html'
+
+	@context.start = 0
+	@context.itemCount = ${q(node).property('itemCount') ? q(node).property('itemCount') : 5}
+	@context.style = ${q(node).property('style') ? q(node).property('style') : 'long'}
+	@context.linkMode = ${q(node).property('linkMode') ? q(node).property('linkMode') : 'directChildren'}
+
+	# I haven't found a way to externalize the renderer - it is always the same! Just the collection changes.
+	pages = Neos.Fusion:Case {
+		directChildren {
+			condition = ${linkMode == 'directChildren'}
+			renderer = Neos.Fusion:Collection {
+				itemName = 'node'
+				itemRenderer = Neos.Fusion:Case {
+					long {
+						condition = ${style == 'long'}
+						renderer = Beheist.NW:PagePreviewLong
+					}
+					short {
+						condition = ${TRUE}
+						renderer = Beheist.NW:PagePreviewShort
+					}
+				}
+				collection = ${q(documentNode).children('[instanceof Neos.Neos:Document]').sortByDate().slice(start, itemCount)}
+			}
+		}
+		allPosts {
+			condition = ${linkMode == 'allPosts'}
+			renderer = Neos.Fusion:Collection {
+				itemName = 'node'
+				itemRenderer = Neos.Fusion:Case {
+					long {
+						condition = ${style == 'long'}
+						renderer = Beheist.NW:PagePreviewLong
+					}
+					short {
+						condition = ${TRUE}
+						renderer = Beheist.NW:PagePreviewShort
+					}
+				}
+				collection = ${q(site).find('[instanceof Beheist.NW:Post]').sortByDate().slice(start, itemCount)}
+			}
+		}
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${'NodeType_Neos.NodeTypes:Page'}
+		}
+	}
+}
+
+prototype(Beheist.NW:PagePreviewShort) < prototype(Neos.Fusion:Template) {
+	templatePath = 'resource://Beheist.NW/Private/Templates/FusionObjects/PagePreview.html'
+	sectionName = 'short'
+	node = ${node}
+	date = ${q(node).property('_hiddenBeforeDateTime') ? q(node).property('_hiddenBeforeDateTime') : q(node).property('_creationDateTime')}
+	title = ${q(node).property('title')}
+	author = ${q(node).property('author')}
+	abstract = Neos.Neos:ContentCollection {
+		nodePath = 'abstract'
+	}
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${'DescendantOf_' + node.identifier}
+		}
+	}
+}
+
+prototype(Beheist.NW:PagePreviewLong) < prototype(Beheist.NW:PagePreviewShort) {
+	sectionName = 'long'
+
+	@cache {
+		mode = 'cached'
+		entryIdentifier {
+			node = ${node}
+			editPreviewMode = ${node.context.currentRenderingMode.name}
+		}
+		entryTags {
+			1 = ${'Node_' + node.identifier}
+			2 = ${'DescendantOf_' + node.identifier}
+		}
+	}
+}

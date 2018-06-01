@@ -1,0 +1,3 @@
+prototype(Beheist.NW:PageWithoutSidebar.Document) < prototype(Beheist.NW:AbstractDocument.Document) {
+    body.templatePath = 'resource://Beheist.NW/Private/Templates/Page/PageWithoutSidebar.html'
+}

@@ -1,0 +1,5 @@
+Beheist.NW:PageWithoutSidebar:
+  superTypes:
+    Beheist.NW:Page: true
+  ui:
+    label: 'Fullpage-Seite'

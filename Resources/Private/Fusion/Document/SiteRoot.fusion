@@ -1,0 +1,3 @@
+prototype(Beheist.NW:SiteRoot.Document) < prototype(Beheist.NW:AbstractDocument.Document) {
+    body.templatePath = 'resource://Beheist.NW/Private/Templates/Page/SiteRoot.html'
+}

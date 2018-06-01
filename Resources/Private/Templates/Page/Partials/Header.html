@@ -1,0 +1,40 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<header>
+	<div class="top-bar top-navigation">
+		<nav class="top-bar-left">
+			{parts.topmenu -> f:format.raw()}
+		</nav>
+		<f:comment>
+			<!--<div class="top-bar-right">-->
+			<!--<ul class="menu">-->
+			<!--<li><input type="search" placeholder="Search"></li>-->
+			<!--<li><button type="button" class="button">Search</button></li>-->
+			<!--</ul>-->
+			<!--</div>-->
+		</f:comment>
+	</div>
+
+
+	<div class="row title">
+		<div class="small-2 columns">
+			<neos:link.node node="{site}" class="logo">
+				<f:render partial="LogoAsSVG" section="partial" />
+			</neos:link.node>
+		</div>
+		<hr class="show-for-small-only">
+		<div class="small-10 columns">
+			<div class="site-title">{siteTitle}</div>
+			<div class="site-subtitle">{siteSubTitle}</div>
+		</div>
+	</div>
+
+	<div class="title-bar show-for-small-only" data-responsive-toggle="main-menu">
+		<button class="menu-icon" type="button" data-toggle></button>
+		<div class="title-bar-title">Menu</div>
+	</div>
+	<nav class="top-bar main-navigation" id="main-menu">
+		{parts.mainmenu -> f:format.raw()}
+	</nav>
+</header>

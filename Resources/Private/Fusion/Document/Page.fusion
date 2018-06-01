@@ -1,0 +1,1 @@
+prototype(Beheist.NW:Page.Document) < prototype(Beheist.NW:AbstractDocument.Document)

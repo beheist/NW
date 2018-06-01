@@ -1,0 +1,80 @@
+<span class="product-rating product-rating--large">
+	<f:if condition="{rating} >= 0.0 && {rating} < 0.25">
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 0.25 && {rating} < 0.75">
+		<i class="fa fa-star-half-full"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 0.75 && {rating} < 1.25">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 1.25 && {rating} < 1.75">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-half-full"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 1.75 && {rating} < 2.25">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 2.25 && {rating} < 2.75">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-half-full"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 2.75 && {rating} < 3.25">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-o"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 3.25 && {rating} < 3.75">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-half-full"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 3.75 && {rating} < 4.25">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-o"></i>
+	</f:if>
+	<f:if condition="{rating} >= 4.25 && {rating} < 4.75">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star-half-full"></i>
+	</f:if>
+	<f:if condition="{rating} >= 4.75">
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+		<i class="fa fa-star"></i>
+	</f:if>
+	<small>&nbsp;{rating} / 5</small>
+</span>

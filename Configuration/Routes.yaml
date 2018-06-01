@@ -1,0 +1,10 @@
+-
+  name: 'Refresh amazon products via API'
+  uriPattern: 'amazonapi/refresh/{securityToken}'
+  defaults:
+    '@package': Beheist.NW
+    '@controller': AmazonApi
+    '@action': updateProducts
+    '@format': html
+  appendExceedingArguments: FALSE
+  httpMethods: ['GET']

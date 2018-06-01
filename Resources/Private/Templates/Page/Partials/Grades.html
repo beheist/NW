@@ -1,0 +1,59 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+	  xmlns="http://www.w3.org/1999/xhtml"
+	  lang="en">
+<f:section name="partial">
+	<h3 class="product-information__gradingheader">Unsere Bewertung</h3>
+	<div class="product-information__grading {f:if(condition:'{productData.grades.vergleichssieger}', then:'is-vergleichssieger')} {f:if(condition:'{productData.grades.preisleistungssieger}', then:'is-preisleistungssieger')}">
+		<f:if condition="{productData.grades.vergleichssieger}">
+			<f:then><div class="product-information__vergleichssieger"><i class="fa fa-trophy"></i>&nbsp;&nbsp;AKTUELLER VERGLEICHSBESTER</div></f:then>
+		</f:if>
+		<f:if condition="{productData.grades.preisleistungssieger}">
+			<f:then><div class="product-information__preisleistungssieger"><i class="fa fa-star"></i>&nbsp;&nbsp;AKTUELLER PREIS-LEISTUNGS-SIEGER</div></f:then>
+		</f:if>
+		<div class="product-information__gradingcontent">
+			<f:render section="singlegrade" arguments="{name: 'Leistung', grade: productData.grades.leistung}"/>
+			<f:render section="singlegrade" arguments="{name: 'Handhabung', grade: productData.grades.handhabung}"/>
+			<f:render section="singlegrade" arguments="{name: 'Ausstattung', grade: productData.grades.ausstattung}"/>
+			<f:render section="singlegrade" arguments="{name: 'Verarbeitung', grade: productData.grades.verarbeitung}"/>
+			<f:render section="singlegrade" arguments="{name: 'Preis', grade: productData.grades.preis}"/>
+		</div>
+		<div class="product-information__finalgrade">
+			<div><strong>Unser<br>Gesamturteil</strong></div>
+			<div class="
+		{f:if(condition:'{productData.grades.total} >= 90', then:'product-information__singlegrade--verygood')}
+		{f:if(condition:'{productData.grades.total} >= 70 && {productData.grades.total} < 90', then:'product-information__singlegrade--good')}
+		{f:if(condition:'{productData.grades.total} >= 50 && {productData.grades.total} < 70', then:'product-information__singlegrade--average')}
+		{f:if(condition:'{productData.grades.total} < 50', then:'product-information__singlegrade--bad')}
+">
+				<p>
+					<span class="grade">{productData.grades.total}</span>
+					<small>/ 100</small>
+				</p>
+				<p><span>
+					{f:if(condition:'{productData.grades.total} >= 90', then:'Sehr empfehlenswert')}
+					{f:if(condition:'{productData.grades.total} >= 70 && {productData.grades.total} < 90', then:'Empfehlenswert')}
+					{f:if(condition:'{productData.grades.total} >= 50 && {productData.grades.total} < 70', then:'Befriedigend')}
+					{f:if(condition:'{productData.grades.total} < 50', then:'Ausreichend')}
+				</span></p>
+			</div>
+		</div>
+	</div>
+</f:section>
+
+<f:section name="singlegrade">
+	<div class="product-information__singlegrade
+		{f:if(condition:'{grade} >= 90', then:'product-information__singlegrade--verygood')}
+		{f:if(condition:'{grade} >= 70 && {grade} < 90', then:'product-information__singlegrade--good')}
+		{f:if(condition:'{grade} >= 50 && {grade} < 70', then:'product-information__singlegrade--average')}
+		{f:if(condition:'{grade} < 50', then:'product-information__singlegrade--bad')}
+">
+		<strong>{name}</strong>
+		<p>
+			<span class="grade">{grade}</span>
+			<small>/ 100</small>
+		</p>
+	</div>
+</f:section>
+
+
+</html>

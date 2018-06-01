@@ -1,0 +1,48 @@
+Beheist.NW:PageList:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: Post-Liste
+    icon: icon-rss
+  properties:
+    itemCount:
+      position: 1
+      type: integer
+      defaultValue: 5
+      ui:
+        label: 'Anzahl der maximal angezeigten Elemente'
+        inspector:
+          group: additionalprops
+        reloadIfChanged: true
+    style:
+      position: 2
+      type: string
+      defaultValue: long
+      ui:
+        label: Anzeigestil
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              short:
+                label: Kurz
+              long:
+                label: Lang
+    linkMode:
+      position: 3
+      type: string
+      defaultValue: directChildren
+      ui:
+        label: Link-Modus
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            values:
+              directChildren:
+                label: 'Direkte Kindseiten'
+              allPosts:
+                label: 'Alle Posts'

@@ -1,0 +1,13 @@
+/**
+* Root Fusion template for the nische.com site
+*/
+
+include: Overrides/**
+include: Objects/**
+include: Document/**
+include: Content/**
+
+root.default {
+    renderPath >
+    type = ${node.nodeType.name + '.Document'}
+}

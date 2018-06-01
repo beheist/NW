@@ -1,0 +1,35 @@
+Beheist.NW:ProductTable:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: Produkt-Tabelle
+    icon: icon-table
+  properties:
+    productsSource:
+      type: string
+      defaultValue: 'childproducts'
+      ui:
+        label: Produktauswahl
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          position: 1
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              'childproducts':
+                label: 'Direkt untergeordnete Produkte'
+              'allproducts':
+                label: 'Alle Produkte'
+              'selectedproducts':
+                label: 'Ausgewählte Produkte'
+    products:
+      type: references
+      ui:
+        label: Produkte
+        reloadIfChanged: true
+        inspector:
+          group: additionalprops
+          position: 2
+          editorOptions:
+            nodeTypes: ['Beheist.NW:Product']

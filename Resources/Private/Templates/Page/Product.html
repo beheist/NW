@@ -1,0 +1,97 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace cr=Neos\ContentRepository\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<f:section name="body">
+	<f:render partial="Header" arguments="{_all}"/>
+
+	<div class="row">
+		<div class="column small-12">
+			{content.breadcrumbs -> f:format.raw()}
+		</div>
+	</div>
+
+	<div class="row">
+		<main class="column small-12 product-main">
+
+			<h1>{content.productData.name}</h1>
+
+			<section class="product-information row">
+				<div class="columns small-12 medium-6 product-information__left">
+					<div class="orbit" role="region" aria-label="Bilder von {content.productData.name}" data-orbit data-auto-play="false">
+						<ul class="orbit-container">
+							<button class="orbit-previous"><span class="show-for-sr">Vorheriges Bild</span>&#9664;&#xFE0E;</button>
+							<button class="orbit-next"><span class="show-for-sr">Nächstes Bild</span>&#9654;&#xFE0E;</button>
+							<li class="is-active orbit-slide">
+								<img src="{content.productData.images.large}" alt="Titelbild zu {content.productData.name}">
+								<figcaption class="orbit-caption">Titelbild zu {content.productData.name}</figcaption>
+							</li>
+							<f:if condition="{content.images.variants}">
+								<f:for each="{content.images.variants}" as="singleImageURL" iteration="it">
+									<li class="orbit-slide">
+										<img src="{singleImageURL}" alt="Produktbild {it.cycle} zu {content.productData.name}">
+										<figcaption class="orbit-caption">Produktbild {it.cycle} zu {content.productData.name}</figcaption>
+									</li>
+								</f:for>
+							</f:if>
+						</ul>
+						<nav class="orbit-bullets">
+							<button class="is-active" data-slide="0">
+								<span class="show-for-sr">Titelbild zu {content.productData.name}</span>
+							</button>
+							<f:if condition="{content.image.variants}">
+								<f:for each="{content.image.variants}" as="singleImageURL" iteration="it">
+									<button data-slide="{it.cycle}">
+										<span class="show-for-sr">Produktbild {it.cycle} zu {content.productData.name}</span>
+									</button>
+								</f:for>
+							</f:if>
+						</nav>
+					</div>
+				</div>
+
+				<div class="columns small-12 medium-6 product-information__right">
+					<h2 class="headline-inverted">Produktinformationen</h2>
+					<p class="lead">
+						<f:render partial="Rating" arguments="{rating: content.productData.amazon.rating}"/>
+					</p>
+
+					{content.productData.abstract -> f:format.raw()}
+
+					<f:render partial="Grades" section="partial" arguments="{productData: content.productData}" />
+
+					<p class="lead product-information__price">
+						Preis:
+						<f:if condition="{content.salePrice} < {content.listPrice}">
+							<small>{content.productData.amazon.listPrice -> f:format.number(decimals:'2', decimalSeparator:',', thousandsSeparator:'.')} &euro;</small>
+						</f:if>
+						<strong>{content.productData.amazon.salePrice -> f:format.number(decimals:'2', decimalSeparator:',', thousandsSeparator:'.')} &euro;</strong>*
+					</p>
+					<p>
+						<a href="{content.productData.amazon.link}" target="_blank" title="{content.productData.name} bei Amazon kaufen" class="button large secondary">
+							Angebot ansehen <i class="fa fa-arrow-right"></i>
+						</a>
+					</p>
+					<p>
+						<small>
+							* Preis von Amazon.de, zuletzt geprüft am {content.productData.lastModifiedDate -> f:format.date(format:'d.m.Y, H:i')} Uhr
+							- <span data-tooltip aria-haspopup="true" class="has-tip top" data-disable-hover="false" tabindex="1"
+									title="Product prices and availability are accurate as of the date/time indicated and are subject to change. Any price and availability information displayed on Amazon.de at the time of purchase will apply to the purchase of this product.">Details</span>
+						</small>
+					</p>
+				</div>
+			</section>
+		</main>
+	</div>
+	<div class="row">
+		<section class="column small-12 medium-6">
+			{content.main -> f:format.raw()}
+		</section>
+		<aside class="column small-12 medium-6">
+			<f:render partial="ProductTechnicalData" arguments="{productData: content.productData}"/>
+			{content.aside -> f:format.raw()}
+		</aside>
+	</div>
+
+	<f:render partial="Footer" arguments="{_all}"/>
+</f:section>

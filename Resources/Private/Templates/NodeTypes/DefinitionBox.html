@@ -1,0 +1,13 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+{namespace fusion=Neos\Fusion\ViewHelpers}
+{namespace media=Neos\Media\ViewHelpers}
+
+<div {attributes -> f:format.raw()}>
+	<div class="definitionbox__left">
+		<i class="fa fa-question-circle"></i>
+	</div>
+	<div class="definitionbox__right">
+		<neos:contentElement.editable property="term"/>
+		<neos:contentElement.editable property="definition"/>
+	</div>
+</div>
