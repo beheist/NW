@@ -1,7 +1,10 @@
 prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
-    @context.distributionPackageName = 'Beheist.NW'
-    @context.bustCounter = '1000'
     head {
+        // API
+        @context.distributionPackageName = 'Beheist.NW'
+        @context.bustCounter = '1000'
+        // END OF API
+
         stylesheets.site = Neos.Fusion:Template {
             templatePath = 'resource://Beheist.NW/Private/Templates/Page/Common.html'
             sectionName = 'stylesheets'
@@ -24,6 +27,10 @@ prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
     }
 
     body {
+        // API
+        @context.distributionPackageName = 'Beheist.NW'
+        // END OF API
+
         templatePath = 'resource://Beheist.NW/Private/Templates/Page/Default.html'
         sectionName = 'body'
         parts {
