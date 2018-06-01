@@ -20,7 +20,7 @@
 	<div class="row title">
 		<div class="small-2 columns">
 			<neos:link.node node="{site}" class="logo">
-				<f:render partial="LogoAsSVG" section="partial" />
+				{parts.logo -> f:format.raw()}
 			</neos:link.node>
 		</div>
 		<hr class="show-for-small-only">

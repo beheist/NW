@@ -27,6 +27,9 @@ prototype(Beheist.NW:AbstractDocument.Document) < prototype(Neos.Neos:Page) {
         templatePath = 'resource://Beheist.NW/Private/Templates/Page/Default.html'
         sectionName = 'body'
         parts {
+            logo = Neos.Fusion:Template {
+                templatePath = ${'resource://' + distributionPackageName + '/Private/Templates/Objects/Logo.svg'}
+            }
             topmenu = Neos.Neos:Menu {
                 @class = 'Beheist\\NW\\Fusion\\MenuImplementation'
                 startingPoint = ${q(site).children('[instanceof Neos.Neos:Document]').get(0)}
