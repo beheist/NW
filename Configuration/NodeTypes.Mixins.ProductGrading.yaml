@@ -1,3 +1,25 @@
 # This Mixin must be adapted for each product.
 Beheist.NW:ProductGradingMixin:
   abstract: true
+  properties:
+    vergleichssieger:
+      type: boolean
+      ui:
+        label: Vergleichssieger?
+        inspector:
+          group: grading
+          position: 1
+    preisleistungssieger:
+      type: boolean
+      ui:
+        label: PreisLeistungsChampion?
+        inspector:
+          group: grading
+          position: 2
+    totalGrade:
+      type: integer
+      ui:
+        label: Gesamt (0-100)
+        inspector:
+          group: grading
+          position: 99
