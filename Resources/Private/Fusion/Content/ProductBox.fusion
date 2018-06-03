@@ -9,11 +9,14 @@ prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
     productData = Beheist.NW:ProductData
 
     @cache {
-        mode = 'uncached'
-        context {
-            1 = 'node'
-            2 = 'documentNode'
-            3 = 'product'
+        mode = 'cached'
+        entryIdentifier {
+            node = ${'Node_' + node.identifier}
+            product = ${'Node_' + product.identifier}
+        }
+        entryTags {
+            1 = ${'Node_' + node.identifier}
+            2 = ${'Node_' + product.identifier}
         }
     }
 }
@@ -21,13 +24,4 @@ prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
 prototype(Beheist.NW:ProductBoxNarrow) < prototype(Beheist.NW:ProductBox) {
     templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductBox.html'
     attributes.class = 'productbox productbox--narrow'
-
-    @cache {
-        mode = 'uncached'
-        context {
-            1 = 'node'
-            2 = 'documentNode'
-            3 = 'product'
-        }
-    }
 }

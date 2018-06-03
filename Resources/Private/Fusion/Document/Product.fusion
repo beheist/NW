@@ -7,11 +7,9 @@ prototype(Beheist.NW:Product.Document) < prototype(Beheist.NW:AbstractDocument.D
             }
         }
         @cache {
-            mode = 'uncached'
-            context {
-                1 = 'node'
-                2 = 'documentNode'
-                3 = 'site'
+            mode = 'cached'
+            entryTags {
+                1 = ${'Node_' + product.identifier}
             }
         }
     }
