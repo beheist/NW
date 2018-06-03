@@ -1,9 +1,10 @@
-// News Feed
 prototype(Beheist.NW:ProductTable) < prototype(Neos.Neos:Content) {
-	templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
+    templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
 	sectionName = 'table'
 	attributes.class = 'producttable'
 
+    // INTERNAL
+    headerRow = Beheist.NW:ProductTableHeaderRow
 	@context.productsSource = ${q(node).property('productsSource')}
 	products = Neos.Fusion:Case {
 		childproducts {
@@ -44,36 +45,21 @@ prototype(Beheist.NW:ProductTable) < prototype(Neos.Neos:Content) {
 		}
 	}
 }
+prototype(Beheist.NW:ProductTableHeaderRow) < prototype(Neos.Fusion:Template) {
+    // API
+    templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
+    sectionName = 'headerRow'
+}
 
 prototype(Beheist.NW:ProductTableRow) < prototype(Neos.Fusion:Template) {
+    // API
 	templatePath = 'resource://Beheist.NW/Private/Templates/NodeTypes/ProductTable.html'
 	sectionName = 'row'
 
+    // INTERNAL
 	product = ${product}
-
-    productdata {
-		name = ${q(product).property('title')}
-		listPrice = ${q(product).property('listPrice') / 100}
-		salePrice = ${q(product).property('salePrice') ? q(product).property('salePrice') / 100 : (q(product).property('offerPrice') ? q(product).property('offerPrice') / 100 : q(product).property('listPrice') / 100)}
-		brand = ${q(product).property('brand')}
-		rating = ${q(product).property('rating')}
-		amazonLink = ${q(product).property('amazonLink')}
-		mediumImage = ${q(product).property('mediumImage')}
-		totalGrade = ${q(product).property('totalGrade')}
-		vergleichssieger = ${q(product).property('vergleichssieger')}
-		preisleistungssieger = ${q(product).property('preisleistungssieger')}
-
-		// The following propertys are product-specific and need to be adapted for each product category
-		specs {
-			saugleistung = ${q(product).property('saugleistung')}
-			behaeltergroesse = ${q(product).property('behaeltergroesse')}
-			zubehoer = ${q(product).property('zubehoer')}
-			schlauchlaenge = ${q(product).property('schlauchlaenge')}
-			kabellaenge = ${q(product).property('kabellaenge')}
-			blasfunktion = ${q(product).property('blasfunktion')}
-			steckdose = ${q(product).property('steckdose')}
-		}
-	}
+    productData = Beheist.NW:ProductDataExtractor
+    productRating = Beheist.NW:ProductRating
 
 	@cache {
 		mode = 'cached'

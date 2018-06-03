@@ -6,7 +6,7 @@ prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
 
     @context.product = ${product ? product : q(node).property('product')}
 
-    productData = Beheist.NW:ProductData
+    productData = Beheist.NW:ProductDataExtractor
 
     @cache {
         mode = 'cached'

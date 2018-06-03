@@ -50,6 +50,9 @@ prototype(Beheist.NW:ProductDataExtractor) < prototype(Neos.Fusion:RawArray) {
 
     // API
     grades = Neos.Fusion:RawArray {
+        vergleichssieger = ${q(product).property('vergleichssieger')}
+        preisleistungssieger = ${q(product).property('preisleistungssieger')}
+        total = ${q(product).property('totalGrade')}
     }
 
     // API

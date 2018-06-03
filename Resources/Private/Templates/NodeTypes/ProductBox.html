@@ -12,7 +12,7 @@
 				<img src="{productData.images.medium}" alt="Produktbild für {productData.name}">
 			</neos:link.node>
 			<div class="productbox__rating">
-				<f:render partial="Rating" arguments="{rating: productData.amazon.rating}"/>
+				{productRating -> f:format.raw()}
 			</div>
 		</div>
 		<div class="productbox__details">
