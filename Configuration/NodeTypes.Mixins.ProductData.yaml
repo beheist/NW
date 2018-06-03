@@ -1,0 +1,18 @@
+# This Mixin must be adapted for each product.
+Beheist.NW:ProductDataMixin:
+  abstract: true
+  properties:
+    brand:
+      type: reference
+      ui:
+        label: Marke
+        inspector:
+          group: product
+          position: 1
+    rating:
+      type: string
+      ui:
+        label: Rating (0-5)
+        inspector:
+          group: product
+          position: 2

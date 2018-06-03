@@ -1,294 +1,49 @@
-# This TechnicalDataMixin must be adapted for each product category.
-Beheist.NW:HasTechnicalDataMixin:
-  abstract: true
+Beheist.NW:Product:
+  superTypes:
+    Neos.NodeTypes:Page: true
+    # APIs - site packages need to implement these
+    Beheist.NW:ProductAmazonMixin: true
+    Beheist.NW:ProductDataMixin: true
+    Beheist.NW:ProductGradingMixin: true
   ui:
-    inspector:
-      tabs:
-        technicaldata:
-          label: 'Technische Daten'
-          position: 91
-          icon: icon-dropbox
-      groups:
-        technicaldata:
-          label: Technische Daten
-          tab: technicaldata
-          position: 1
-  properties:
-    saugleistung:
-      type: string
-      ui:
-        label: Saugleistung
-        inspector:
-          group: technicaldata
-          position: 1
-    behaeltergroesse:
-      type: string
-      ui:
-        label: Behältergröße
-        inspector:
-          group: technicaldata
-          position: 2
-    zubehoer:
-      type: string
-      ui:
-        label: Zubehör
-        inspector:
-          group: technicaldata
-          position: 3
-    schlauchlaenge:
-      type: string
-      ui:
-        label: Schlauchlänge
-        inspector:
-          group: technicaldata
-          position: 4
-    kabellaenge:
-      type: string
-      ui:
-        label: Kabellänge
-        inspector:
-          group: technicaldata
-          position: 5
-    blasfunktion:
-      type: boolean
-      ui:
-        label: Blasfunktion
-        inspector:
-          group: technicaldata
-          position: 6
-    steckdose:
-      type: boolean
-      ui:
-        label: Integrierte Steckdose?
-        inspector:
-          group: technicaldata
-          position: 7
-
-Beheist.NW:HasProductPropertiesMixin:
-  abstract: true
-  ui:
+    label: Produkt
+    icon: icon-archive
     inspector:
       tabs:
         product:
           label: 'Produktdaten'
           position: 90
           icon: icon-archive
+        gradings:
+          label: 'Bewertungen'
+          position: 91
+          icon: icon-percent
+        amazon:
+          label: 'Amazon-API'
+          position: 92
+          icon: icon-dollar
       groups:
-        productprops:
-          label: Produkteigenschaften
+        product:
+          label: 'Produkteigenschaften'
           tab: product
           position: 1
+        technicaldata:
+          label: 'Technische Daten'
+          tab: product
+          position: 2
+        otherdata:
+          label: 'Sonstige Daten'
+          tab: product
+          position: 3
         grading:
-          label: Bewertung (Noten 0-100)
-          tab: product
-          position: 10
-        apiproductprops:
-          label: API-Eigenschaften (automatisch aktualisiert)
-          tab: product
-          position: 20
-
-Beheist.NW:Product:
-  superTypes:
-    Neos.NodeTypes:Page: true
-    Beheist.NW:HasProductPropertiesMixin: true
-    Beheist.NW:HasTechnicalDataMixin: true
-  ui:
-    label: Produkt
-    icon: icon-archive
-  properties:
-    asin:
-      type: string
-      ui:
-        label: ASIN
-        inspector:
-          group: productprops
+          label: 'Bewertung (Noten 0-100)'
+          tab: gradings
           position: 1
-    brand:
-      type: reference
-      ui:
-        label: Marke
-        inspector:
-          group: productprops
-          position: 2
-    rating:
-      type: string
-      ui:
-        label: Rating (0-5)
-        inspector:
-          group: productprops
-          position: 3
-    # --- Grading
-    vergleichssieger:
-      type: boolean
-      ui:
-        label: Vergleichssieger?
-        inspector:
-          group: grading
+        amazon:
+          label: 'Amazon-API'
+          tab: amazon
           position: 1
-    preisleistungssieger:
-      type: boolean
-      ui:
-        label: PreisLeistungsChampion?
-        inspector:
-          group: grading
+        amazonapi:
+          label: 'API-Eigenschaften (automatisch aktualisiert)'
+          tab: amazon
           position: 2
-    leistungGrade:
-      type: integer
-      ui:
-        label: Leistung (0-100)
-        inspector:
-          group: grading
-          position: 11
-    handhabungGrade:
-      type: integer
-      ui:
-        label: Handhabung (0-100)
-        inspector:
-          group: grading
-          position: 12
-    ausstattungGrade:
-      type: integer
-      ui:
-        label: Ausstattung (0-100)
-        inspector:
-          group: grading
-          position: 13
-    verarbeitungGrade:
-      type: integer
-      ui:
-        label: Verarbeitung (0-100)
-        inspector:
-          group: grading
-          position: 14
-    preisGrade:
-      type: integer
-      ui:
-        label: Preis (0-100)
-        inspector:
-          group: grading
-          position: 15
-    totalGrade:
-      type: integer
-      ui:
-        label: Gesamt (0-100)
-        inspector:
-          group: grading
-          position: 16
-
-# Auto-SET properties via API:-------------------------------.
-# _xpath values are always relative to the Item element. the correct item is selected automatically.
-    listPrice:
-      _xpath: '/g:ItemAttributes/g:ListPrice/g:Amount'
-      type: string
-      ui:
-        label: Listenpreis (ct.)
-        inspector:
-          group: apiproductprops
-          position: 1
-    offerPrice:
-      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:Price/g:Amount'
-      type: string
-      ui:
-        label: Angebotspreis (ct.)
-        inspector:
-          group: apiproductprops
-          position: 2
-    salePrice:
-      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:SalePrice/g:Amount'
-      type: string
-      ui:
-        label: Sale-Preis (ct.)
-        inspector:
-          group: apiproductprops
-          position: 3
-    availability:
-      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:Availability'
-      type: string
-      ui:
-        label: Verfügbarkeit
-        inspector:
-          group: apiproductprops
-          position: 3
-
-    amazonLink:
-      _xpath: '/g:DetailPageURL'
-      type: string
-      ui:
-        label: Amazon-Link
-        inspector:
-          group: apiproductprops
-          position: 30
-
-    smallImage:
-      _xpath: '/g:SmallImage/g:URL'
-      type: string
-      ui:
-        label: Small Image URL
-        inspector:
-          group: apiproductprops
-          position: 40
-    mediumImage:
-      _xpath: '/g:MediumImage/g:URL'
-      type: string
-      ui:
-        label: Medium Image URL
-        inspector:
-          group: apiproductprops
-          position: 41
-    largeImage:
-      _xpath: '/g:LargeImage/g:URL'
-      type: string
-      ui:
-        label: Large Image URL
-        inspector:
-          group: apiproductprops
-          position: 42
-    imageVariants:
-      _xpath: '/g:ImageSets/g:ImageSet[@Category="variant"]/g:LargeImage/g:URL'
-      type: array
-      ui:
-        label: Image Variant URLs (large)
-        inspector:
-          group: apiproductprops
-          position: 43
-
-    ean:
-      _xpath: '/g:ItemAttributes/g:EAN'
-      type: string
-      ui:
-        label: Artikelnummer
-        inspector:
-          group: apiproductprops
-          position: 50
-    length:
-      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Length'
-      type: string
-      ui:
-        label: Länge (1/100 in)
-        inspector:
-          group: apiproductprops
-          position: 51
-    width:
-      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Width'
-      type: string
-      ui:
-        label: Breite (1/100 in)
-        inspector:
-          group: apiproductprops
-          position: 52
-    height:
-      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Height'
-      type: string
-      ui:
-        label: Höhe (1/100 in)
-        inspector:
-          group: apiproductprops
-          position: 53
-    weight:
-      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Weight'
-      type: string
-      ui:
-        label: Gewicht (1/100 lbs)
-        inspector:
-          group: apiproductprops
-          position: 54

@@ -1,0 +1,129 @@
+# This Mixin must be adapted for each product.
+Beheist.NW:ProductAmazonMixin:
+  abstract: true
+  properties:
+    asin:
+      type: string
+      ui:
+        label: ASIN
+        inspector:
+          group: amazon
+          position: 1
+
+# Auto-SET properties via API:-------------------------------.
+# _xpath values are always relative to the Item element. the correct item is selected automatically.
+    listPrice:
+      _xpath: '/g:ItemAttributes/g:ListPrice/g:Amount'
+      type: string
+      ui:
+        label: Listenpreis (ct.)
+        inspector:
+          group: amazonapi
+          position: 1
+    offerPrice:
+      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:Price/g:Amount'
+      type: string
+      ui:
+        label: Angebotspreis (ct.)
+        inspector:
+          group: amazonapi
+          position: 2
+    salePrice:
+      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:SalePrice/g:Amount'
+      type: string
+      ui:
+        label: Sale-Preis (ct.)
+        inspector:
+          group: amazonapi
+          position: 3
+    availability:
+      _xpath: '/g:Offers/g:Offer/g:OfferListing/g:Availability'
+      type: string
+      ui:
+        label: Verfügbarkeit
+        inspector:
+          group: amazonapi
+          position: 3
+
+    amazonLink:
+      _xpath: '/g:DetailPageURL'
+      type: string
+      ui:
+        label: Amazon-Link
+        inspector:
+          group: amazonapi
+          position: 30
+
+    smallImage:
+      _xpath: '/g:SmallImage/g:URL'
+      type: string
+      ui:
+        label: Small Image URL
+        inspector:
+          group: amazonapi
+          position: 40
+    mediumImage:
+      _xpath: '/g:MediumImage/g:URL'
+      type: string
+      ui:
+        label: Medium Image URL
+        inspector:
+          group: amazonapi
+          position: 41
+    largeImage:
+      _xpath: '/g:LargeImage/g:URL'
+      type: string
+      ui:
+        label: Large Image URL
+        inspector:
+          group: amazonapi
+          position: 42
+    imageVariants:
+      _xpath: '/g:ImageSets/g:ImageSet[@Category="variant"]/g:LargeImage/g:URL'
+      type: array
+      ui:
+        label: Image Variant URLs (large)
+        inspector:
+          group: amazonapi
+          position: 43
+
+    ean:
+      _xpath: '/g:ItemAttributes/g:EAN'
+      type: string
+      ui:
+        label: Artikelnummer
+        inspector:
+          group: amazonapi
+          position: 50
+    length:
+      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Length'
+      type: string
+      ui:
+        label: Länge (1/100 in)
+        inspector:
+          group: amazonapi
+          position: 51
+    width:
+      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Width'
+      type: string
+      ui:
+        label: Breite (1/100 in)
+        inspector:
+          group: amazonapi
+          position: 52
+    height:
+      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Height'
+      type: string
+      ui:
+        label: Höhe (1/100 in)
+        inspector:
+          group: amazonapi
+          position: 53
+    weight:
+      _xpath: '/g:ItemAttributes/g:ItemDimensions/g:Weight'
+      type: string
+      ui:
+        label: Gewicht (1/100 lbs)
+        inspector:
+          group: amazonapi
+          position: 54

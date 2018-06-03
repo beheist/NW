@@ -1,0 +1,3 @@
+# This Mixin must be adapted for each product.
+Beheist.NW:ProductTechnicalDataMixin:
+  abstract: true
