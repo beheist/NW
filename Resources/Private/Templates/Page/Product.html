@@ -66,7 +66,7 @@
 
                     {content.productData.abstract -> f:format.raw()}
 
-                    <f:render partial="Grades" section="partial" arguments="{productData: content.productData}"/>
+                    {content.productGrades -> f:format.raw()}
 
                     <p class="lead product-information__price">
                         <f:if condition="{content.productData.amazon.listPrice}">
@@ -104,7 +104,7 @@
             {content.main -> f:format.raw()}
         </section>
         <aside class="column small-12 medium-6">
-            <f:render partial="ProductTechnicalData" arguments="{productData: content.productData}"/>
+            {content.productTechnicalData -> f:format.raw()}
             {content.aside -> f:format.raw()}
         </aside>
     </div>

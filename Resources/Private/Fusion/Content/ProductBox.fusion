@@ -10,10 +10,6 @@ prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
 
     @cache {
         mode = 'cached'
-        entryIdentifier {
-            node = ${'Node_' + node.identifier}
-            product = ${'Node_' + product.identifier}
-        }
         entryTags {
             1 = ${'Node_' + node.identifier}
             2 = ${'Node_' + product.identifier}

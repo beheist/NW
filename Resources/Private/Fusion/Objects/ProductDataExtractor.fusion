@@ -1,5 +1,5 @@
 // Product data extraction
-prototype(Beheist.NW:ProductData) < prototype(Neos.Fusion:RawArray) {
+prototype(Beheist.NW:ProductDataExtractor) < prototype(Neos.Fusion:RawArray) {
     product = ${product}
     name = ${q(product).property('title')}
     lastModifiedDate = ${q(product).property('_lastModificationDateTime')}
@@ -48,25 +48,11 @@ prototype(Beheist.NW:ProductData) < prototype(Neos.Fusion:RawArray) {
         variants = ${q(product).property('imageVariants')}
     }
 
+    // API
     grades = Neos.Fusion:RawArray {
-        vergleichssieger = ${q(node).property('vergleichssieger')}
-        preisleistungssieger = ${q(node).property('preisleistungssieger')}
-        leistung = ${q(product).property('leistungGrade')}
-        handhabung = ${q(product).property('handhabungGrade')}
-        ausstattung = ${q(product).property('ausstattungGrade')}
-        verarbeitung = ${q(product).property('verarbeitungGrade')}
-        preis = ${q(product).property('preisGrade')}
-        total = ${q(product).property('totalGrade')}
     }
 
-    // The following propertys are product-specific and need to be adapted for each product category
+    // API
     specs = Neos.Fusion:RawArray {
-        saugleistung = ${q(product).property('saugleistung')}
-        behaeltergroesse = ${q(product).property('behaeltergroesse')}
-        zubehoer = ${q(product).property('zubehoer')}
-        schlauchlaenge = ${q(product).property('schlauchlaenge')}
-        kabellaenge = ${q(node).property('kabellaenge')}
-        blasfunktion = ${q(product).property('blasfunktion')}
-        steckdose = ${q(product).property('steckdose')}
     }
 }

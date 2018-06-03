@@ -1,11 +1,17 @@
 prototype(Beheist.NW:Product.Document) < prototype(Beheist.NW:AbstractDocument.Document) {
     body {
+        // API
         templatePath = 'resource://Beheist.NW/Private/Templates/Page/Product.html'
         content {
-            productData = Beheist.NW:ProductData {
+            productData = Beheist.NW:ProductDataExtractor {
                 @context.product = ${node}
             }
+
+            productGrades = Beheist.NW:ProductGrades
+
+            productTechnicalData = Beheist.NW:ProductTechnicalData
         }
+
         @cache {
             mode = 'cached'
             entryTags {

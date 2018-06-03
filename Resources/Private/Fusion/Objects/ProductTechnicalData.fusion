@@ -1,0 +1,16 @@
+prototype(Beheist.NW:ProductTechnicalData) < prototype(Neos.Fusion:Template) {
+    // API
+    templatePath = 'resource://Beheist.NW/Private/Templates/FusionObjects/ProductTechnicalData.html'
+
+    // INTERNAL
+    productData = Beheist.NW:ProductDataExtractor {
+        @context.product = ${node}
+    }
+
+    @cache {
+        mode = 'cached'
+        entryTags {
+            1 = ${'Node_' + product.identifier}
+        }
+    }
+}
