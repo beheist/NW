@@ -6,6 +6,7 @@ use Beheist\NW\Domain\Service\ProductNodeService;
 use Neos\ContentRepository\Domain\Model\NodeData;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Mvc\Controller\ActionController;
+use Neos\Neos\Service\PublishingService;
 
 /**
  * @Flow\Scope("singleton")
@@ -23,6 +24,12 @@ class AmazonApiController extends ActionController
      * @Flow\Inject
      */
     protected $productNodeService;
+
+    /**
+     * @var PublishingService
+     * @Flow\Inject
+     */
+    protected $publishingService;
 
     /**
      * @var ProductNodeService
@@ -67,7 +74,7 @@ class AmazonApiController extends ActionController
             $extractionPaths = $this->productNodeService->getPropertyExtractionPaths($productNode);
             $extractedProperties = $this->amazonApiService->extractProperties($productsInformation, $asin, $extractionPaths);
             $this->productNodeService->setExtractedProperties($productNode, $extractedProperties);
-
+            $this->publishingService->publishNode($productNode);
             $this->persistenceManager->whitelistObject($productNode);
         }
         $this->persistenceManager->persistAll();

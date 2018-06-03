@@ -6,6 +6,7 @@ use Beheist\NW\Domain\Service\ProductNodeService;
 use Neos\ContentRepository\Domain\Model\NodeData;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
+use Neos\Neos\Service\PublishingService;
 
 /**
  * @Flow\Scope("singleton")
@@ -25,13 +26,21 @@ class AmazonApiCommandController extends CommandController
     protected $productNodeService;
 
     /**
-     * Update all products in this site.
+     * @var PublishingService
+     * @Flow\Inject
      */
-    public function updateProductsCommand()
+    protected $publishingService;
+
+    /**
+     * Update all products in this site.
+     * @param string $asin
+     */
+    public function updateProductsCommand(string $asin = '')
     {
         $productNodes = $this->productNodeService->fetchAllProductNodes();
         $productsByASIN = $this->productNodeService->getProductNodesByASIN($productNodes);
-        $productsInformation = $this->amazonApiService->lookupMultipleByASIN(array_keys($productsByASIN));
+        $asins = $asin !== '' ? [$asin] : array_keys($productsByASIN);
+        $productsInformation = $this->amazonApiService->lookupMultipleByASIN($asins);
 
         // Check for errors
         if ($this->amazonApiService->containsErrors($productsInformation)) {
@@ -52,6 +61,7 @@ class AmazonApiCommandController extends CommandController
             $extractionPaths = $this->productNodeService->getPropertyExtractionPaths($productNode);
             $extractedProperties = $this->amazonApiService->extractProperties($productsInformation, $asin, $extractionPaths);
             $this->productNodeService->setExtractedProperties($productNode, $extractedProperties);
+            $this->publishingService->publishNode($productNode);
         }
     }
 

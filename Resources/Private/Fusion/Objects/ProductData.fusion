@@ -9,8 +9,26 @@ prototype(Beheist.NW:ProductData) < prototype(Neos.Fusion:RawArray) {
     }
 
     amazon = Neos.Fusion:RawArray {
-        listPrice = ${q(product).property('listPrice') / 100}
-        salePrice = ${q(product).property('salePrice') ? q(product).property('salePrice') / 100 : (q(product).property('offerPrice') ? q(product).property('offerPrice') / 100 : q(product).property('listPrice') / 100)}
+        listPrice = ${q(product).property('listPrice') ?  (q(product).property('listPrice') / 100) : ''}
+        salePrice = Neos.Fusion:Case {
+            hasSalePrice {
+                condition = ${q(product).property('salePrice')}
+                renderer = ${q(product).property('salePrice') / 100}
+            }
+            hasOfferPrice {
+                condition = ${q(product).property('offerPrice')}
+                renderer = ${q(product).property('offerPrice') / 100}
+            }
+            hasListPrice {
+                condition = ${q(product).property('listPrice')}
+                renderer = ${q(product).property('listPrice') / 100}
+            }
+            hasNoPrice {
+                condition = ${true}
+                @position = "end 9999"
+                renderer = ''
+            }
+        }
         rating = ${q(product).property('rating')}
         link = ${q(product).property('amazonLink')}
         ean = ${q(product).property('ean')}

@@ -4,10 +4,9 @@ namespace Beheist\NW\Domain\Service;
 use Neos\ContentRepository\Domain\Model\NodeData;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\Workspace;
-use Neos\ContentRepository\Domain\Repository\NodeDataRepository;
-use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
-use Neos\ContentRepository\Domain\Service\NodeTypeManager;
+use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
+use Neos\Neos\Domain\Service\ContentContextFactory;
 use Neos\Neos\Domain\Service\SiteService;
 
 /**
@@ -18,32 +17,15 @@ use Neos\Neos\Domain\Service\SiteService;
 class ProductNodeService
 {
     /**
+     * @var ContentContextFactory
      * @Flow\Inject
-     * @var ContextFactoryInterface
      */
-    protected $contextFactory;
-
-    /**
-     * @Flow\Inject
-     * @var NodeTypeManager
-     */
-    protected $nodeTypeManager;
-
-    /**
-     * @Flow\Inject
-     * @var NodeDataRepository
-     */
-    protected $nodeDataRepository;
+    protected $contentContextFactory;
 
     /**
      * @var NodeInterface
      */
-    protected $siteNode;
-
-    /**
-     * @var Workspace
-     */
-    protected $workspace;
+    protected $rootNode;
 
     /**
      * Caches extraction config per node type.
@@ -56,23 +38,21 @@ class ProductNodeService
     {
         // Get the site node once.
         /** @var NodeInterface $rootNode */
-        $rootNode = $this->contextFactory->create()->getRootNode();
-        $this->workspace = $rootNode->getContext()->getWorkspace();
-        $sitesNode = $rootNode->getNode(SiteService::SITES_ROOT_PATH);
-        $this->siteNode = $sitesNode->getNode('root');
+        $this->rootNode = $this->contentContextFactory->create()->getRootNode();
     }
 
     /**
-     * @return array
+     * @return array<NodeInterface>
      */
     public function fetchAllProductNodes()
     {
-        return $this->nodeDataRepository->findByParentAndNodeTypeRecursively('/', 'Beheist.NW:Product', $this->workspace);
+        $flowQuery = new FlowQuery([$this->rootNode]);
+        return $flowQuery->find('[instanceof Beheist.NW:Product][_hidden = false]')->get();
     }
 
     /**
      * @param array $productNodes
-     * @return array<NodeData>
+     * @return array<NodeInterface>
      */
     public function getProductNodesByASIN(array $productNodes){
         $productsByASIN = [];
@@ -88,10 +68,10 @@ class ProductNodeService
     }
 
     /**
-     * @param NodeData $productNode
+     * @param NodeInterface $productNode
      * @return array
      */
-    public function getPropertyExtractionPaths(NodeData $productNode)
+    public function getPropertyExtractionPaths(NodeInterface $productNode)
     {
         $nodeType = $productNode->getNodeType();
 
@@ -109,10 +89,10 @@ class ProductNodeService
     }
 
     /**
-     * @param NodeData $productNode
+     * @param NodeInterface $productNode
      * @param array $properties
      */
-    public function setExtractedProperties(NodeData $productNode, array $properties)
+    public function setExtractedProperties(NodeInterface $productNode, array $properties)
     {
         foreach ($properties as $key => $value){
             $productNode->setProperty($key, $value);
