@@ -1,6 +1,7 @@
 {namespace neos=Neos\Neos\ViewHelpers}
 {namespace fusion=Neos\Fusion\ViewHelpers}
 {namespace media=Neos\Media\ViewHelpers}
+{namespace nw=Beheist\NW\ViewHelpers}
 
 <div {attributes -> f:format.raw()}>
 	<h3 class="productbox__title">
@@ -26,12 +27,7 @@
 					<!--<span>{productData.salePrice -> f:format.number(decimals:'2', decimalSeparator:',', thousandsSeparator:'.')} &euro;</span>-->
 					<!--</div>-->
 				</f:comment>
-				<div class="productbox__grade
-					{f:if(condition:'{productData.grades.total} >= 90', then:'product-information__singlegrade--verygood')}
-					{f:if(condition:'{productData.grades.total} >= 70 && {productData.grades.total} < 90', then:'product-information__singlegrade--good')}
-					{f:if(condition:'{productData.grades.total} >= 50 && {productData.grades.total} < 70', then:'product-information__singlegrade--average')}
-					{f:if(condition:'{productData.grades.total} < 50', then:'product-information__singlegrade--bad')}
-				">
+				<div class="productbox__grade product-information__singlegrade--{nw:gradingClass(grade: productData.grades.total)}">
 					<strong>Bewertung</strong>
 					<p>
 						<span class="grade">{productData.grades.total}</span>
