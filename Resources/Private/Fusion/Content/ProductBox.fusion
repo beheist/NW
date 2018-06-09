@@ -10,6 +10,10 @@ prototype(Beheist.NW:ProductBox) < prototype(Neos.Neos:Content) {
 
     @cache {
         mode = 'cached'
+        entryIdentifier {
+            node = ${node.identifier}
+            editPreviewMode = ${node.context.currentRenderingMode.name}
+        }
         entryTags {
             1 = ${'Node_' + node.identifier}
             2 = ${'Node_' + product.identifier}
